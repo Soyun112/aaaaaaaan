@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>주도 실습 카드 - 첫 회식, 두 손으로 정중하게</title>
+  <meta name="description" content="대학 수업용 5인/4인/3인 모둠 주도(술자리 예절) 실습 모바일 웹">
+  <!-- Google Fonts: Jua & Gowun Dodum -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 데스크톱용 중앙 컨테이너 -->
+  <div class="app-container">
+    
+    <!-- 상단 헤더 & 진행 바 -->
+    <header class="app-header">
+      <div class="header-top">
+        <button id="btn-back" class="icon-btn" aria-label="이전 단계로" title="이전 단계로">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="header-title-area">
+          <span id="group-badge" class="group-tag">모둠 -</span>
+          <h1 class="header-title">주도 실습</h1>
+        </div>
+
+        <div class="header-right-btns">
+          <button id="btn-sound-toggle" class="icon-btn" aria-label="소리 켜기/끄기" title="소리 토글">
+            <svg id="icon-sound-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <svg id="icon-sound-off" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+          
+          <button id="btn-open-matrix" class="badge-btn hidden" aria-label="전체 역할표 모달 보기">역할표</button>
+        </div>
+      </div>
+
+      <!-- 상단 진행 단계 (설정 → 역할표 → 실습 1·2·3 → 거절 → 정리) -->
+      <nav class="progress-nav" aria-label="진행 단계">
+        <div class="progress-dots">
+          <div class="dot-item active" data-step="1" title="시작">
+            <span class="dot-circle">1</span>
+            <span class="dot-label">시작</span>
+          </div>
+          <div class="dot-line"></div>
+          <div class="dot-item" data-step="2" title="인원">
+            <span class="dot-circle">2</span>
+            <span class="dot-label">인원</span>
+          </div>
+          <div class="dot-line"></div>
+          <div class="dot-item" data-step="3" title="역할표">
+            <span class="dot-circle">3</span>
+            <span class="dot-label">역할표</span>
+          </div>
+          <div class="dot-line"></div>
+          <div class="dot-item" data-step="4" title="실습">
+            <span class="dot-circle">4</span>
+            <span class="dot-label">실습</span>
+          </div>
+          <div class="dot-line"></div>
+          <div class="dot-item" data-step="7" title="거절">
+            <span class="dot-circle">5</span>
+            <span class="dot-label">거절</span>
+          </div>
+          <div class="dot-line"></div>
+          <div class="dot-item" data-step="8" title="정리">
+            <span class="dot-circle">6</span>
+            <span class="dot-label">정리</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 (화면별) -->
+    <main id="main-content">
+
+      <!-- STEP 1: 시작 화면 -->
+      <section id="step-1" class="step-view active">
+        <div class="mascot-wrapper">
+          <svg class="mascot-svg mascot-idle" viewBox="0 0 120 160" width="130" height="160" aria-label="초록 병 마스코트">
+            <!-- Bottle body -->
+            <path d="M45,30 L75,30 L75,45 L95,65 L95,140 C95,150 85,155 60,155 C35,155 25,150 25,140 L25,65 L45,45 Z" fill="#7DD3B0" stroke="#3D3A36" stroke-width="3.5" stroke-linejoin="round"/>
+            <!-- Cap -->
+            <rect x="42" y="14" width="36" height="16" rx="4" fill="#FFB4A2" stroke="#3D3A36" stroke-width="3"/>
+            <!-- Cap ridges -->
+            <line x1="50" y1="14" x2="50" y2="30" stroke="#3D3A36" stroke-width="1.5"/>
+            <line x1="60" y1="14" x2="60" y2="30" stroke="#3D3A36" stroke-width="1.5"/>
+            <line x1="70" y1="14" x2="70" y2="30" stroke="#3D3A36" stroke-width="1.5"/>
+            <!-- Label banner (Cute custom tag, no alcohol brand) -->
+            <rect x="33" y="80" width="54" height="40" rx="8" fill="#FFF8EE" stroke="#3D3A36" stroke-width="2"/>
+            <text x="60" y="104" font-family="'Jua', sans-serif" font-size="16" fill="#3D3A36" text-anchor="middle">주도</text>
+            <!-- Eyes -->
+            <circle cx="48" cy="62" r="4.5" fill="#3D3A36"/>
+            <circle cx="72" cy="62" r="4.5" fill="#3D3A36"/>
+            <circle cx="49.5" cy="60.5" r="1.5" fill="#FFFFFF"/>
+            <circle cx="73.5" cy="60.5" r="1.5" fill="#FFFFFF"/>
+            <!-- Blush -->
+            <ellipse cx="42" cy="67" rx="5" ry="3" fill="#FFB4A2" opacity="0.85"/>
+            <ellipse cx="78" cy="67" rx="5" ry="3" fill="#FFB4A2" opacity="0.85"/>
+            <!-- Smile mouth -->
+            <path d="M54,67 Q60,73 66,67" fill="none" stroke="#3D3A36" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Arms -->
+            <path d="M25,85 Q12,95 20,105" fill="none" stroke="#3D3A36" stroke-width="3" stroke-linecap="round"/>
+            <path d="M95,85 Q108,95 100,105" fill="none" stroke="#3D3A36" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="welcome-card">
+          <h2 class="main-hero-title">주도 실습 카드</h2>
+          <p class="main-hero-subtitle">첫 회식, 두 손으로 정중하게 🍶</p>
+          
+          <div class="group-select-section">
+            <label class="section-label">우리 모둠 번호를 선택하세요</label>
+            <div class="group-grid" id="group-num-grid">
+              <button class="btn-num active" data-num="1">1모둠</button>
+              <button class="btn-num" data-num="2">2모둠</button>
+              <button class="btn-num" data-num="3">3모둠</button>
+              <button class="btn-num" data-num="4">4모둠</button>
+              <button class="btn-num" data-num="5">5모둠</button>
+              <button class="btn-num" data-num="6">6모둠</button>
+              <button class="btn-num" data-num="7">7모둠</button>
+              <button class="btn-num" data-num="8">8모둠</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2: 인원 및 이름 설정 -->
+      <section id="step-2" class="step-view">
+        <div class="card-box">
+          <h2 class="card-title">오늘 몇 명 왔나요?</h2>
+          <p class="card-sub">모둠 인원에 맞추어 역할이 자동 순환됩니다.</p>
+          
+          <div class="count-select-row">
+            <button class="btn-count active" data-count="5">5명 (기본)</button>
+            <button class="btn-count" data-count="4">4명</button>
+            <button class="btn-count" data-count="3">3명</button>
+          </div>
+
+          <div class="name-inputs-section">
+            <label class="section-label">모둠원 이름/닉네임 (비워두면 A, B, C…)</label>
+            <div id="name-input-list" class="name-grid">
+              <!-- JS에서 인원수에 맞춰 생동적으로 생성 -->
+            </div>
+          </div>
+
+          <div class="shuffle-action-area">
+            <button id="btn-shuffle" class="btn-secondary flex-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 3 21 3 21 8"></polyline>
+                <line x1="4" y1="20" x2="21" y2="3"></line>
+                <polyline points="21 16 21 21 16 21"></polyline>
+                <line x1="15" y1="15" x2="21" y2="21"></line>
+                <line x1="4" y1="4" x2="9" y2="9"></line>
+              </svg>
+              역할 무작위 섞기
+            </button>
+          </div>
+
+          <!-- 섞인 배치 결과 리스트 -->
+          <div id="shuffle-result-card" class="shuffle-result-box hidden">
+            <h3 class="result-title">🎲 배정 결과 (A, B, C...)</h3>
+            <div id="shuffled-names-list" class="shuffled-tags"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3: 전체 역할표 -->
+      <section id="step-3" class="step-view">
+        <div class="card-box">
+          <h2 class="card-title">전체 역할표 (3회차 순환)</h2>
+          <p class="card-sub">모든 사람이 역할을 바꿔가며 진행합니다.</p>
+
+          <div class="matrix-table-wrapper">
+            <table class="role-table" id="role-matrix-table">
+              <thead>
+                <tr>
+                  <th>회차</th>
+                  <th>구분</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- JS dynamic generation -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pair-summary-box">
+            <h3 id="current-pairs-title" class="pair-summary-title">📍 1회차 실습 짝</h3>
+            <div id="current-pairs-list" class="pair-chips-row">
+              <!-- JS dynamic generation -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4~6: 실습 회차 화면 (1·2·3회차 공유 템플릿) -->
+      <section id="step-practice" class="step-view">
+        <div class="timer-card">
+          <div class="timer-header">
+            <span id="round-indicator" class="round-badge">1회차 실습</span>
+            <span id="timer-phase-tag" class="phase-tag phase-action">수행 시간 (1분 30초)</span>
+          </div>
+
+          <div class="timer-display-area">
+            <div class="circular-timer">
+              <svg class="timer-svg" viewBox="0 0 100 100">
+                <circle class="timer-bg-circle" cx="50" cy="50" r="44"></circle>
+                <circle id="timer-progress-circle" class="timer-fg-circle" cx="50" cy="50" r="44"></circle>
+              </svg>
+              <div class="timer-text-box">
+                <span id="timer-clock" class="timer-clock">01:30</span>
+                <span id="timer-sub-text" class="timer-sub">모둠 실습 중</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timer-controls">
+            <button id="btn-timer-toggle" class="btn-timer-action">
+              <span id="timer-btn-text">일시정지</span>
+            </button>
+            <button id="btn-timer-add" class="btn-timer-secondary">+30초</button>
+            <button id="btn-timer-reset" class="btn-timer-secondary">초기화</button>
+          </div>
+        </div>
+
+        <!-- 짝별 카드 렌더링 영역 -->
+        <div id="practice-cards-container" class="cards-list">
+          <!-- JS dynamic generation -->
+        </div>
+      </section>
+
+      <!-- STEP 7: 거절 상황 실습 -->
+      <section id="step-7" class="step-view">
+        <div class="timer-card">
+          <div class="timer-header">
+            <span class="round-badge badge-peach">거절 실습</span>
+            <span id="refusal-phase-tag" class="phase-tag phase-action">3분 실습</span>
+          </div>
+
+          <!-- Phase Indicator Bar -->
+          <div class="phase-bar-wrapper">
+            <div class="phase-bar-segments">
+              <div id="refusal-p1" class="p-segment active" style="flex: 3;">상황 30초</div>
+              <div id="refusal-p2" class="p-segment" style="flex: 9;">연습 1분30초</div>
+              <div id="refusal-p3" class="p-segment" style="flex: 6;">재시도 1분</div>
+            </div>
+          </div>
+
+          <div class="timer-display-area mini-timer-display">
+            <span id="refusal-clock" class="timer-clock text-peach">03:00</span>
+            <div class="mini-controls">
+              <button id="btn-refusal-toggle" class="btn-mini-control">일시정지</button>
+              <button id="btn-refusal-add" class="btn-mini-control">+30초</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="refusal-notice-banner">
+          <p>💡 관찰자도 한 번은 거절하는 쪽이나 받아주는 쪽으로 들어가서 연습해보세요!</p>
+        </div>
+
+        <!-- 짝마다 카드 뽑기 영역 -->
+        <div id="refusal-cards-container" class="cards-list">
+          <!-- JS dynamic generation -->
+        </div>
+
+        <!-- 공통 하단 가이드 -->
+        <div class="card-box common-refusal-guide">
+          <h3 class="guide-box-title">📌 공통 상황 대처 팁</h3>
+          <div class="guide-item">
+            <span class="guide-tag">반복 권유 시</span>
+            <p class="dialogue-large">"말씀은 감사하지만 술은 마시지 않겠습니다."</p>
+          </div>
+          <div class="guide-item border-top">
+            <span class="guide-tag tag-green">받아주는 쪽</span>
+            <p class="dialogue-large">"네, 음료로 함께하시면 됩니다."</p>
+            <span class="small-tip">⚠️ 억지로 다시 권하지 않고 상대방의 선택을 존중해 줍니다.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 8: 정리 및 자기점검 -->
+      <section id="step-8" class="step-view">
+        <div class="finish-mascot-area">
+          <svg class="mascot-svg mascot-happy" viewBox="0 0 120 160" width="120" height="150" aria-label="웃는 초록 병 마스코트">
+            <path d="M45,30 L75,30 L75,45 L95,65 L95,140 C95,150 85,155 60,155 C35,155 25,150 25,140 L25,65 L45,45 Z" fill="#7DD3B0" stroke="#3D3A36" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="42" y="14" width="36" height="16" rx="4" fill="#FFB4A2" stroke="#3D3A36" stroke-width="3"/>
+            <rect x="33" y="80" width="54" height="40" rx="8" fill="#FFF8EE" stroke="#3D3A36" stroke-width="2"/>
+            <text x="60" y="104" font-family="'Jua', sans-serif" font-size="16" fill="#3D3A36" text-anchor="middle">완료</text>
+            <!-- Happy Eyes ^ ^ -->
+            <path d="M42,62 Q48,54 54,62" fill="none" stroke="#3D3A36" stroke-width="3" stroke-linecap="round"/>
+            <path d="M66,62 Q72,54 78,62" fill="none" stroke="#3D3A36" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="40" cy="67" rx="5" ry="3" fill="#FFB4A2" opacity="0.9"/>
+            <ellipse cx="80" cy="67" rx="5" ry="3" fill="#FFB4A2" opacity="0.9"/>
+            <!-- Big happy mouth -->
+            <path d="M50,68 Q60,82 70,68 Z" fill="#E07058" stroke="#3D3A36" stroke-width="2.5"/>
+            <!-- Raised Arms -->
+            <path d="M25,85 Q10,65 18,55" fill="none" stroke="#3D3A36" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M95,85 Q110,65 102,55" fill="none" stroke="#3D3A36" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- Sparkles -->
+            <path d="M12,45 L16,40 L20,45 L16,50 Z" fill="#FFE8A3"/>
+            <path d="M100,45 L104,40 L108,45 L104,50 Z" fill="#FFE8A3"/>
+          </svg>
+
+          <div class="finish-banner">
+            <p class="finish-quote">"주도는 결국 상대를 위한 배려예요 💚"</p>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <h2 class="card-title">오늘의 자기점검</h2>
+          <p class="card-sub">실습을 마치며 스스로 체크해 보세요 (탭하여 선택).</p>
+
+          <div id="self-check-list" class="check-list-group">
+            <!-- JS dynamic generation -->
+          </div>
+
+          <div class="takeaway-box">
+            <label for="takeaway-input" class="section-label">💡 실제로 써먹을 것 한 가지</label>
+            <input type="text" id="takeaway-input" class="custom-input" placeholder="예: 두 손으로 받기, 잔 입구 안 닿게 따르기 등" maxlength="50">
+            <span class="small-tip">모둠원들과 말로 한 마디씩 공유해 보세요!</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 고정 하단 액션 버튼 바 -->
+    <footer class="bottom-bar">
+      <button id="btn-main-next" class="btn-primary">시작하기</button>
+    </footer>
+
+  </div>
+
+  <!-- 전체 역할표 모달 Popup -->
+  <div id="modal-matrix" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">전체 역할 순환표</h3>
+        <button id="btn-close-modal" class="modal-close-btn" aria-label="닫기">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="modal-matrix-content">
+          <!-- JS dynamic generation -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
